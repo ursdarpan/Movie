@@ -5,12 +5,15 @@
   "dependencies": {
     "@material-ui/core": "^3.9.4",
     "@material-ui/icons": "^3.0.2",
-    "eslint": "^4.10.0",
+    "@material-ui/styles": "^4.11.4",
+    "material-ui": "^1.0.0-beta.47",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-modal": "^3.12.1",
-    "react-router-dom": "^4.3.1",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "1.1.5",
+    "react-swipeable-views": "^0.14.0",
     "react-youtube": "^7.13.1",
     "typeface-roboto": "0.0.54"
   },
@@ -18,10 +21,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix"
   },
   "proxy": "http://localhost:8085",
   "devDependencies": {
-    "eslint-plugin-react": "^7.4.0"
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2",
+    "prop-types": "^15.7.2"
   }
 }
