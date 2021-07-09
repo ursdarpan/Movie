@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,8 +10,7 @@ import logo from '../../assets/logo.svg';
 import './Header.css';
 
 Modal.setAppElement('body');
-const Header = function (props) {
-  let subtitle;
+const Header = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -25,7 +26,9 @@ const Header = function (props) {
   function closeModal() {
     setIsOpen(false);
   }
-
+  Header.defaultProps = {
+    buttonName: 'Login',
+  };
   return (
     <div>
       <div className="heading-container">
@@ -65,7 +68,4 @@ const Header = function (props) {
   );
 };
 
-Header.defaultProps = {
-  buttonName: 'Login',
-};
 export default Header;

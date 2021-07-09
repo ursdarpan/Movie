@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Button, FormControl, Input, InputLabel, FormHelperText,
+  Button, FormControl, Input, InputLabel,
 } from '@material-ui/core';
 
 export default function LoginForm() {
-  const [LoginForm, setLoginForm] = useState({
+  const [loginForm, setLoginForm] = useState({
     id: 0,
     login: '',
     password: '',

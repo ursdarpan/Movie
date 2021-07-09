@@ -1,80 +1,70 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import {Paper} from "material-ui";
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
-import LoginForm from "./LoginComp";
-import RegisterForm from "./RegisterComp";
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import LoginForm from './LoginComp';
+import RegisterForm from './RegisterComp';
 
 function TabContainer(props) {
-    return (
-        <Typography {...props} component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    );
+  return (
+    <Typography {...props} component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
 }
 
 TabContainer.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        marginTop: theme.spacing.unit * 3,
-        backgroundColor: theme.palette.background.paper,
-    },
-});
+export default function BasicTabs() {
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-class BasicTabs extends React.Component {
-    state = {
-        activeTabIndex: 0,
-    };
+  const handleChange = (event, value) => {
+    setActiveTabIndex(value);
+  };
 
-    handleChange = (event, value) => {
-        this.setState({ activeTabIndex: value });
-    };
+  // const { classes } = this.props;
 
-    render() {
-        const { classes } = this.props;
-        const { activeTabIndex } = this.state;
-
-        return (
-            <div className={classes.root}>
-                <Paper square>
-                    <Tabs value={activeTabIndex} onChange={this.handleChange}>
-                        <Tab label="Login" />
-                        <Tab label="Register" />
-                    </Tabs>
-                </Paper>
-                {
-                    activeTabIndex === 0 &&
+  return (
+    <div className="root">
+      <Paper square>
+        <Tabs value={activeTabIndex} onChange={handleChange}>
+          <Tab label="Login" />
+          <Tab label="Register" />
+        </Tabs>
+      </Paper>
+      {
+                    activeTabIndex === 0
                     // When the user clicks on Test One or Test Two, update the state
                     // to display Tab 2
-                    <div onClick={() => this.setState({ activeTabIndex: 1 })}>
-                        <TabContainer >
-                            <LoginForm />
-                        </TabContainer>
+                    && (
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                    <div onClick={() => setActiveTabIndex(1)}>
+                      <TabContainer>
+                        <LoginForm />
+                      </TabContainer>
                     </div>
+                    )
                 }
-                {
-                    activeTabIndex === 1 &&
+      {
+                    activeTabIndex === 1
+                    && (
                     <div>
-                        <TabContainer>
-                            <RegisterForm />
-                        </TabContainer>
+                      <TabContainer>
+                        <RegisterForm />
+                      </TabContainer>
                     </div>
+                    )
                 }
-            </div>
-        );
-    }
+    </div>
+  );
 }
 
-BasicTabs.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(BasicTabs);
-
-
+// BasicTabs.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };

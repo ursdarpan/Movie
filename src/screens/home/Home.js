@@ -1,66 +1,57 @@
-import React, { useState } from 'react';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+/* eslint-disable react/prop-types */
+
+import React, { useEffect, useState } from 'react';
 import './Home.css';
-import IconButton from '@material-ui/core/IconButton';
-import { GridListTileBar } from '@material-ui/core';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { useSelector } from 'react-redux';
 import Header from '../../common/header/Header';
+import UpcomingMovieGridList from './HorizontalGrid';
+import ReleasedMovieGridList from './ReleasedMovieGrid';
+import FilterCard from './FilterCard';
 
 export default function HomePage() {
-  const [homeProps, setHomeProps] = useState([
-    {
-      poster_url: '',
-      title: '',
-    },
-  ]);
+  const [upcomingMovieList, setUpcomingMovieList] = useState([]);
+  const upcomingmovies = useSelector((state) => state.movies);
+  useEffect(() => {
+    if (upcomingmovies && upcomingmovies.length) {
+      setUpcomingMovieList(upcomingmovies);
+    }
+  }, [upcomingmovies]);
+
+  const [genreList, setGenreList] = useState([]);
+  const genres = useSelector((state) => state.genres);
+  useEffect(() => {
+    if (genres && genres.length) {
+      setGenreList(genres);
+    }
+  }, [genres]);
+
+  const [artistList, setArtistList] = useState([]);
+  const artists = useSelector((state) => state.artists);
+  useEffect(() => {
+    if (artists && artists.length) {
+      setArtistList(artists);
+    }
+  }, [artists]);
 
   return (
-    <div className="grid-container">
+    <div>
       <div>
         <Header buttonName="LOGIN" />
       </div>
-      <div className="headName">Upcoming Movies</div>
-      <div className="upComing">
-        <div className="rootGrid">
-          <GridList className="gridList" cols={2.5}>
-            {tileData.map((tile) => (
-              <GridListTile key={tile.img}>
-                <img src={tile.img} alt={tile.title} />
-                <GridListTileBar
-                  title={tile.title}
-                  className={'titleBar' + ' ' + 'title'}
-                  actionIcon={(
-                    <IconButton aria-label={`star ${tile.title}`}>
-                      <StarBorderIcon className="title" />
-                    </IconButton>
-                                )}
-                />
-              </GridListTile>
-            ))}
-          </GridList>
+      <div className="headName">
+        Upcoming Movies
+      </div>
+      <div className="UpcomingSection">
+        <UpcomingMovieGridList mlist={upcomingMovieList} />
+      </div>
+      <div className="releaseSection">
+        <div className="releaseGrid">
+          <ReleasedMovieGridList />
+        </div>
+        <div className="filterSection">
+          <FilterCard genres={genreList} artists={artistList} />
         </div>
       </div>
-      <div className="released"></div>
     </div>
   );
 }
-
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *     cols: 2,
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */

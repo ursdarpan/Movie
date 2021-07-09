@@ -17,7 +17,7 @@ export default function RegisterForm() {
   const [status, setStatus] = useState('');
 
   const {
-    id, first_name, last_name, email_address, password, mobile_number,
+    first_name, last_name, email_address, password, mobile_number,
   } = addUserForm;
 
   //  const history = useHistory();
@@ -30,10 +30,7 @@ export default function RegisterForm() {
       },
       body: JSON.stringify(UserForm),
     });
-
     const data = await rawResponse.json();
-    console.log(data);
-
     if (data.status === 'ACTIVE') {
       setStatus('Registration Successful. Please Login!');
     } else {
