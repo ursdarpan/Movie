@@ -17,6 +17,7 @@ export default function RegisterForm() {
   const [status, setStatus] = useState('');
 
   const {
+    // eslint-disable-next-line camelcase
     first_name, last_name, email_address, password, mobile_number,
   } = addUserForm;
 

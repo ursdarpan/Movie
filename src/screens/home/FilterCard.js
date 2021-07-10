@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     justifyContent: 'flex-start  space-around',
     alignItems: 'flex-start',
   },
   content: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     minWidth: '240px',
     maxWidth: '240px',
   },
@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
   },
   textField: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     minWidth: '240px',
     maxWidth: '240px',
   },
   applyButton: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     minWidth: '240px',
     maxWidth: '240px',
     textTransform: 'uppercase',
@@ -52,11 +52,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+const ITEM_HEIGHT = 30;
+const ITEM_PADDING_TOP = 4;
 const MenuProps = {
   PaperProps: {
-    variant: 'elevation',
+    variant: 'outlined',
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,

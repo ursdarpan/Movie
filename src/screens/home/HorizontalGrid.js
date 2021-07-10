@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ImageList from '@material-ui/core/ImageList';
+import ImageListItem from '@material-ui/core/ImageListItem';
+import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
@@ -20,9 +20,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
-    cellHeight: '250px',
+    rowHeight: '250',
+  },
+  ImageListItem: {
+    transform: 'translateZ(0)',
   },
   img: {
+  //  maxWidth: '100%',
+    maxHeight: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
   },
@@ -40,12 +45,12 @@ export default function UpcomingMovieGridList({ mlist }) {
 
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={6}>
+      <ImageList className={classes.gridList} cols={6}>
         {
           mlist.map((tile) => (
-            <GridListTile className={classes.gridTiles} key={tile.id}>
+            <ImageListItem key={tile.id}>
               <img className={classes.img} src={tile.poster_url} alt={tile.title} />
-              <GridListTileBar
+              <ImageListItemBar
                 title={tile.title}
                 classes={{
                   root: classes.titleBar,
@@ -57,10 +62,10 @@ export default function UpcomingMovieGridList({ mlist }) {
                   </IconButton>
                               )}
               />
-            </GridListTile>
+            </ImageListItem>
           ))
 }
-      </GridList>
+      </ImageList>
     </div>
   );
 }

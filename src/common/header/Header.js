@@ -32,12 +32,12 @@ const Header = (props) => {
   return (
     <div>
       <div className="heading-container">
-        <Grid container className="grid-container" spacing={8} justify="flex-start" alignItems="center" direction="row">
+        <Grid container className="grid-container" spacing={8} justifyContent="flex-start" alignItems="center" direction="row">
           <Grid key={1} item>
             <img className="logo" src={logo} alt="Logo" />
           </Grid>
         </Grid>
-        <Grid container className="grid-container" spacing={8} justify="flex-end" alignItems="center" direction="row">
+        <Grid container className="grid-container" spacing={8} justifyContent="flex-end" alignItems="center" direction="row">
           <Grid key={2} item>
             <Button
               className="BookButton"

@@ -4,15 +4,14 @@ import React, {
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HomePage from './home/Home';
+import Details from './details/details';
 
 export default function Controller() {
   const dispatch = useDispatch();
 
   // Upcoming movie logic
   const urlGetMovies = new URL('http://localhost:8085/api/v1/movies?status=PUBLISHED');
-  const UpcomingMovieParams = new URLSearchParams(urlGetMovies.search.slice(1));
   async function loadUpcomingMovies() {
-    UpcomingMovieParams.append('status', 'PUBLISHED');
     const rawResponse = await fetch(urlGetMovies);
     const upcomingMovies = await rawResponse.json();
     setTimeout(() => {
@@ -40,9 +39,6 @@ export default function Controller() {
   useEffect(() => {
     loadReleasedMovies();
   }, [filterParams]);
-  // useEffect(() => {
-  //   loadReleasedMovies();
-  // }, []);
 
   async function loadGenres() {
     const rawResponse = await fetch('http://localhost:8085/api/v1/genres');
@@ -80,6 +76,7 @@ export default function Controller() {
               <HomePage />
             )}
           />
+          <Route exact path="/details/:id" component={Details} />
         </div>
       </Router>
     </div>

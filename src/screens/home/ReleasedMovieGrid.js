@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ImageList from '@material-ui/core/ImageList';
+import ImageListItem from '@material-ui/core/ImageListItem';
+import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
     height: 450,
   },
+  img: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   poster: {
     cursor: 'pointer',
   },
@@ -28,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// eslint-disable-next-line react/prop-types
 export default function ReleasedMovieGridList() {
   const classes = useStyles();
 
@@ -41,14 +49,20 @@ export default function ReleasedMovieGridList() {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={350} cols={4} className={classes.gridList}>
-        <GridListTile key="Subheader" style={{ height: 'auto' }}>
+      <ImageList rowHeight={350} cols={4} className={classes.gridList}>
+        <ImageListItem key="Subheader" style={{ height: 'auto' }}>
           <ListSubheader component="div" />
-        </GridListTile>
+        </ImageListItem>
         {releasedMovieList.map((tile) => (
-          <GridListTile className={classes.poster} key={tile.id}>
-            <img src={tile.poster_url} alt={tile.title} />
-            <GridListTileBar
+          <ImageListItem className={classes.poster} key={tile.id}>
+            <Link to={{
+              pathname: `/details/${tile.id}`,
+            }}
+            >
+              {/* eslint-disable-next-line max-len */}
+              <img className={classes.img} src={tile.poster_url} alt={tile.title} />
+            </Link>
+            <ImageListItemBar
               title={tile.title}
               subtitle={(
                 <span>
@@ -62,9 +76,9 @@ export default function ReleasedMovieGridList() {
                 </IconButton>
                               )}
             />
-          </GridListTile>
+          </ImageListItem>
         ))}
-      </GridList>
+      </ImageList>
     </div>
   );
 }
