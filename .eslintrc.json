@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "plugin:react/recommended",
+         "airbnb"
+    ],
+    "plugins": ["react"],
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    },
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    }
+}
