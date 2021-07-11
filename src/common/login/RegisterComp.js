@@ -1,7 +1,8 @@
 import {
-  Button, FormControl, Input, InputLabel,
+  Button, FormControl, Input, InputLabel
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import './RegisterComp.css';
 // import { Link, useHistory } from 'react-router-dom';
 
 export default function RegisterForm() {

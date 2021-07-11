@@ -2,9 +2,12 @@ import React, {
   useEffect,
 } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import browserHistory from 'history/createBrowserHistory';
 import { useDispatch, useSelector } from 'react-redux';
 import HomePage from './home/Home';
 import Details from './details/details';
+// Bookshow is giving lot of bugs , hence skipping the link
+// import BookShow from './bookshow/BookShow';
 
 export default function Controller() {
   const dispatch = useDispatch();
@@ -67,16 +70,11 @@ export default function Controller() {
   return (
   // eslint-disable-next-line react/jsx-filename-extension
     <div>
-      <Router>
+      <Router history={browserHistory}>
         <div>
-          <Route
-            exact
-            path="/"
-            render={(props) => (
-              <HomePage />
-            )}
-          />
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/details/:id" component={Details} />
+          {/*<Route exact path="/bookshow/:id" component={BookShow} />*/}
         </div>
       </Router>
     </div>

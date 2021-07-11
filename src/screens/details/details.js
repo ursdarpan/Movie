@@ -8,9 +8,7 @@ import './details.css';
 import '@fontsource/roboto';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import IconButton from '@material-ui/core/IconButton';
-import yellow from '@material-ui/core/colors/yellow';
 import YouTube from 'react-youtube';
-import { render } from 'react-dom';
 import Header from '../../common/header/Header';
 
 const useStyles = makeStyles((theme) => ({
@@ -122,7 +120,7 @@ export default function Details() {
   return (
     <div>
       <div>
-        <Header />
+        <Header showButton="block" />
       </div>
       <div>
         <Link to="/">
@@ -171,7 +169,7 @@ export default function Details() {
           <div>
             <Typography variant="subtitle1" className={classes.fieldName}>Rate this movie:</Typography>
             <br />
-            <StarBorderIcon className={classes.starBorder}/>
+            <StarBorderIcon className={classes.starBorder} />
             <StarBorderIcon />
             <StarBorderIcon />
             <StarBorderIcon />

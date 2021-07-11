@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
+// Header indicating logo and buttons
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import BasicTabs from '../login/ModalForm';
-// import BookShow from '../../screens/bookshow/BookShow';
 import logo from '../../assets/logo.svg';
 import './Header.css';
 
 Modal.setAppElement('body');
-const Header = (props) => {
+const Header = ({ showButton = 'none', buttonName = 'Login' }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -26,43 +26,61 @@ const Header = (props) => {
   function closeModal() {
     setIsOpen(false);
   }
-  Header.defaultProps = {
-    buttonName: 'Login',
-  };
+
+  function buttonShow() {
+    const x = document.getElementById('bookButton');
+    if (showButton === 'none') {
+      x.style.display = 'none';
+    }
+    if (showButton === 'block') {
+      x.style.display = 'block';
+    }
+  }
+
+  useEffect(() => {
+    buttonShow();
+  }, [showButton]);
+
   return (
     <div>
       <div className="heading-container">
-        <Grid container className="grid-container" spacing={8} justifyContent="flex-start" alignItems="center" direction="row">
-          <Grid key={1} item>
+        <div className="logo-container">
+          <div>
             <img className="logo" src={logo} alt="Logo" />
-          </Grid>
-        </Grid>
-        <Grid container className="grid-container" spacing={8} justifyContent="flex-end" alignItems="center" direction="row">
-          <Grid key={2} item>
-            <Button
-              className="BookButton"
-              variant="contained"
-              color="primary"
-              onClick={openModal}
-            >
-              Book Show
-            </Button>
-            <Modal
-              className="modalClass"
-              overlayClassName="Overlay"
-              isOpen={modalIsOpen}
-              onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal}
-              contentLabel="Login/Register Modal"
-            >
-              { /*   <Button onClick={closeModal}>close</Button> */}
-              <BasicTabs />
-            </Modal>
-          </Grid>
-          <Grid key={3} item>
-            <Button className="Button" variant="contained" color="default">{props.buttonName}</Button>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
+        <div className="book-button-container">
+          {/* <Link to={BookShow}> */}
+          <Button
+            id="bookButton"
+            className="bookButton"
+            variant="contained"
+            color="primary"
+            display="none"
+          >
+            Book Show
+          </Button>
+          {/* </Link> */}
+        </div>
+        <div className="login-button-container">
+          <Button
+            id="loginButton"
+            variant="contained"
+            color="default"
+            onClick={openModal}
+          >
+            {buttonName}
+          </Button>
+          <Modal
+            name="LoginRegisterModal"
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            contentLabel="Login/Register Modal"
+          >
+            <BasicTabs />
+          </Modal>
+        </div>
       </div>
     </div>
   );
