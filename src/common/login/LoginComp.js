@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button, FormControl, Input, InputLabel,
 } from '@material-ui/core';
 import './LoginComp.css';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 export default function LoginForm() {
   const [loginForm, setLoginForm] = useState({
@@ -14,8 +15,9 @@ export default function LoginForm() {
     login, password,
   } = loginForm;
   const [isAuthenticated, userHasAuthenticated] = useState(false);
-  const [status, setStatus] = useState('');
+  const [loginStatus, setStatus] = useState('');
   const history = useHistory();
+  const dispatch = useDispatch();
 
   async function performAuthentication() {
     const paramCreds = window.btoa(`${login}:${password}`);
@@ -35,7 +37,12 @@ export default function LoginForm() {
         console.log('hello');
         userHasAuthenticated(true);
         setStatus('Login Successful');
-        history.push('/');
+        localStorage.setItem('result', JSON.stringify(result));
+        localStorage.setItem('access-token', rawResponse.headers.get('access-token'));
+        setTimeout(() => {
+          dispatch({ type: 'SET_USER_LOGGED_IN', payload: isAuthenticated });
+        }, 1);
+        //     history.push('/');
       }
     } catch (e) {
       setStatus(`Login failed ${e.message}`);
@@ -91,7 +98,8 @@ export default function LoginForm() {
         >
           LOGIN
         </Button>
-
+        <br />
+        <span>{loginStatus}</span>
       </form>
     </div>
   );

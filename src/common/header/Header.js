@@ -8,14 +8,13 @@ import Modal from 'react-modal';
 import BasicTabs from '../login/ModalForm';
 import logo from '../../assets/logo.svg';
 import './Header.css';
+import {useDispatch, useSelector} from 'react-redux';
 
 Modal.setAppElement('body');
-const Header = ({ showButton = 'none', buttonName = 'Login' }) => {
+const Header = ({ showButton = 'none' }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
+  const [buttonName, setButtonName] = React.useState('Login');
+  const dispatch = useDispatch();
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -25,6 +24,25 @@ const Header = ({ showButton = 'none', buttonName = 'Login' }) => {
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  const isAuthenticated = useSelector((state) => (state.isAuthenticated));
+  useEffect(() => {
+    if (isAuthenticated) {
+      setButtonName('Logout');
+      closeModal();
+    } else {
+      setButtonName('Login');
+    }
+  }, [isAuthenticated]);
+
+  function openModal() {
+    if (buttonName === 'Login') {
+      setIsOpen(true);
+    } else {
+      setButtonName('Login');
+      //     dispatch({ type: 'SET_USER_LOGGED_IN', payload: false });
+    }
   }
 
   function buttonShow() {
